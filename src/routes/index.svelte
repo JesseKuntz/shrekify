@@ -43,8 +43,11 @@
 	}
 
 	.drop-area {
-		padding: 60px;
-		border: 4px dashed;
+		min-width: 200px;
+		min-height: 200px;
+		padding: 20px;
 		border-radius: 8px;
+		box-shadow: rgb(0 0 0 / 30%) 0px 0px 18px 0px inset;
+		cursor: pointer;
 	}
 </style>
