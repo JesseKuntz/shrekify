@@ -57,4 +57,10 @@
 		justify-content: center;
 		align-items: center;
 	}
+
+	@media (max-width: 600px) {
+		h1 {
+			font-size: 60px;
+		}
+	}
 </style>
