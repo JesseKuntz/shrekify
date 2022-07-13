@@ -74,14 +74,22 @@
 		e.stopPropagation();
 	}
 
-	onMount(() => {
+	function initializeDropArea() {
 		dropArea = document.querySelector('.drop-area');
 
+		console.log(dropArea);
+
 		if (dropArea) {
+			function highlight() {
+				dragging = true;
+			}
+			function unhighlight() {
+				dragging = false;
+			}
+
 			['dragenter', 'dragover', 'dragleave', 'drop'].forEach((eventName) => {
 				dropArea && dropArea.addEventListener(eventName, preventDefaults, false);
 			});
-
 			['dragenter', 'dragover'].forEach((eventName) => {
 				dropArea && dropArea.addEventListener(eventName, highlight, false);
 			});
@@ -89,38 +97,28 @@
 				dropArea && dropArea.addEventListener(eventName, unhighlight, false);
 			});
 
-			function highlight() {
-				dragging = true;
-			}
-
-			function unhighlight() {
-				dragging = false;
-			}
-
 			dropArea.addEventListener('drop', handleDrop, false);
 		}
-	});
+	}
+
+	onMount(() => initializeDropArea());
 </script>
 
 <div class="container center-everything">
-	{#if dropped}
-		<div class="button-container">
-			<button class="button shrekify-button" on:click={() => file && uploadFile(file)}
-				>Shrekify</button
-			>
-			<button class="button clear-button" on:click={clearFile}>Start Over</button>
-		</div>
-	{/if}
+	<div class:hide={!dropped} class="button-container">
+		<button class="button shrekify-button" on:click={() => file && uploadFile(file)}
+			>Shrekify</button
+		>
+		<button class="button clear-button" on:click={clearFile}>Start Over</button>
+	</div>
 
-	{#if !dropped}
-		<div class="drop-area" class:highlight={dragging}>
-			<form class="my-form">
-				<input type="file" id="fileElem" accept="image/*" on:change={handleInputChange} />
-				<label class="button" for="fileElem">Upload a Face</label>
-			</form>
-			<p>...or Drag 'n Drop</p>
-		</div>
-	{/if}
+	<div class="drop-area" class:highlight={dragging} class:hide={dropped}>
+		<form class="my-form">
+			<input type="file" id="fileElem" accept="image/*" on:change={handleInputChange} />
+			<label class="button" for="fileElem">Upload a Face</label>
+		</form>
+		<p>...or Drag 'n Drop</p>
+	</div>
 
 	<img class="preview-image" src="" alt="" />
 </div>
@@ -130,11 +128,16 @@
 		margin-top: 30px;
 	}
 
+	.hide {
+		display: none;
+	}
+
 	.drop-area {
 		width: 300px;
 		max-width: 300px;
 		height: 300px;
 		padding: 20px;
+		margin: auto;
 		border-radius: 8px;
 		box-shadow: rgb(0 0 0 / 30%) 0px 0px 18px 0px inset;
 	}
@@ -144,8 +147,6 @@
 	}
 
 	.button-container {
-		display: flex;
-		justify-content: space-between;
 		margin-bottom: 30px;
 		width: 370px;
 	}
@@ -179,5 +180,6 @@
 
 	.preview-image {
 		max-width: 300px;
+		border-radius: 8px;
 	}
 </style>
