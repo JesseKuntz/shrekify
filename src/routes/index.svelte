@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DropArea from '../lib/DropArea.svelte';
+	import DropArea from '../lib/components/DropArea.svelte';
 </script>
 
 <main class="center-everything">
@@ -69,7 +69,6 @@
 		<div class="header-background" />
 	</div>
 
-
 	<DropArea />
 </main>
 
@@ -89,9 +88,9 @@
 
 	.wave-container {
 		position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 0;
+		top: 0;
+		width: 100%;
+		z-index: 0;
 	}
 
 	.header-container {
@@ -118,7 +117,7 @@
 		margin: 0;
 		padding: 20px 40px;
 		z-index: 1;
-    position: relative;
+		position: relative;
 	}
 
 	.center-everything {
