@@ -32,10 +32,6 @@
 
 			landscape = img.width > img.height;
 
-			console.log(img.width);
-			console.log(img.height);
-			console.log(landscape);
-
 			fetch(url, {
 				method: 'POST',
 				body: formData
@@ -113,8 +109,6 @@
 
 	function initializeDropArea() {
 		dropArea = document.querySelector('.drop-area');
-
-		console.log(dropArea);
 
 		if (dropArea) {
 			function highlight() {
