@@ -9,6 +9,9 @@
 	let landscape = false;
 	let shrekifiedImage = '';
 
+	let form: HTMLFormElement;
+	let previewImage: HTMLImageElement;
+
 	function readFile(file: File, callback: (data: string) => void) {
 		const reader = new FileReader();
 
@@ -28,9 +31,7 @@
 
 			loading = true;
 
-			let img = document.querySelector('.preview-image') as HTMLImageElement;
-
-			landscape = img.width > img.height;
+			landscape = previewImage.width > previewImage.height;
 
 			fetch(url, {
 				method: 'POST',
@@ -39,8 +40,7 @@
 				.then(async (response) => {
 					const json = await response.json();
 
-					let img = document.querySelector('.preview-image') as HTMLImageElement;
-					img.src = json.image;
+					previewImage.src = json.image;
 					shrekifiedImage = json.image;
 				})
 				.catch(() => {
@@ -78,8 +78,7 @@
 
 	function previewFile(file: File) {
 		readFile(file, (src) => {
-			let img = document.querySelector('.preview-image') as HTMLImageElement;
-			img.src = src;
+			previewImage.src = src;
 
 			dropped = true;
 		});
@@ -88,9 +87,9 @@
 	function clearFile() {
 		file = null;
 		dropped = false;
-
-		let img = document.querySelector('.preview-image') as HTMLImageElement;
-		img.src = '';
+		shrekifiedImage = '';
+		previewImage.src = '';
+		form.reset();
 	}
 
 	function downloadImage() {
@@ -111,21 +110,14 @@
 		dropArea = document.querySelector('.drop-area');
 
 		if (dropArea) {
-			function highlight() {
-				dragging = true;
-			}
-			function unhighlight() {
-				dragging = false;
-			}
-
 			['dragenter', 'dragover', 'dragleave', 'drop'].forEach((eventName) => {
 				dropArea && dropArea.addEventListener(eventName, preventDefaults, false);
 			});
 			['dragenter', 'dragover'].forEach((eventName) => {
-				dropArea && dropArea.addEventListener(eventName, highlight, false);
+				dropArea && dropArea.addEventListener(eventName, () => (dragging = true), false);
 			});
 			['dragleave', 'drop'].forEach((eventName) => {
-				dropArea && dropArea.addEventListener(eventName, unhighlight, false);
+				dropArea && dropArea.addEventListener(eventName, () => (dragging = false), false);
 			});
 
 			dropArea.addEventListener('drop', handleDrop, false);
@@ -145,7 +137,7 @@
 	</div>
 
 	<div class="drop-area" class:highlight={dragging} class:hide={dropped}>
-		<form class="my-form">
+		<form bind:this={form} class="my-form">
 			<input type="file" id="fileElem" accept="image/*" on:change={handleInputChange} />
 			<label class="button" for="fileElem">Upload a Face</label>
 		</form>
@@ -154,7 +146,7 @@
 
 	<div class="preview-container">
 		<div class:hide={!loading} class="loader">Loading...</div>
-		<img class="preview-image" src="" alt="" />
+		<img bind:this={previewImage} class="preview-image" src="" alt="" />
 	</div>
 </div>
 
