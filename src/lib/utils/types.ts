@@ -14,7 +14,7 @@ type PixelMapInterfaceThis = {
 	width: number;
 	height: number;
 	templateMap: TemplateMapType;
-	data: TemplateMapType; // TODO: maybe wrong
+	data: TemplateMapType;
 	clear: () => void;
 	clone: () => PixelMapInterfaceThis;
 	setMap: (data: TemplateMapType) => void;

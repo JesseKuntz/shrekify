@@ -164,7 +164,7 @@ const ImageProcessor = <ImageProcessorFunction>function (canvas, image) {
 	};
 
 	this.traverseImage = (map, k, oracleValue, backupValue) => {
-		const _temp = map.data.map(function (e) {
+		const _temp = map.data.map((e) => {
 			return e.slice();
 		});
 
@@ -229,11 +229,7 @@ const ImageProcessor = <ImageProcessorFunction>function (canvas, image) {
 		return dataMap as Array<Array<number>>;
 	};
 
-	this.loadImage = function (image) {
-		if (image.complete !== true) {
-			return;
-		}
-
+	this.loadImage = () => {
 		this.pasteImage(image);
 	};
 };

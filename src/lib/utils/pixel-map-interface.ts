@@ -22,7 +22,7 @@ const PixelMapInterface = <PixelMapInterfaceFunction>function (mode, width, heig
 	}
 
 	this.clear = () => {
-		this.data = this.templateMap.map(function (e) {
+		this.data = this.templateMap.map((e) => {
 			return e.slice();
 		});
 	};
