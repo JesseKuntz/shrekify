@@ -1,9 +1,10 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import * as nodeCanvas from 'canvas';
 import type { Image } from 'canvas';
-import * as faceapi from 'face-api.js';
-import type { Point } from 'face-api.js';
+import * as faceapi from '@vladmandic/face-api';
+import type { Point } from '@vladmandic/face-api';
 import { drawRotated, turnSkinGreen } from '$lib/utils/canvas-helpers';
+import '@tensorflow/tfjs-node';
 
 export const post: RequestHandler = async ({ request }) => {
 	// Keep until we have it running on a server in production OR we test a prod build locally

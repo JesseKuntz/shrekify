@@ -15,7 +15,7 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
-		"@tensorflow/tfjs-node": "^3.19.0",
+		"@tensorflow/tfjs-node": "^3.20.0",
 		"@typescript-eslint/eslint-plugin": "^5.27.0",
 		"@typescript-eslint/parser": "^5.27.0",
 		"canvas": "^2.9.3",
@@ -34,7 +34,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"face-api.js": "^0.22.2"
+		"@vladmandic/face-api": "^1.7.3"
 	},
 	"lint-staged": {
 		"*.{js,ts,svelte,md,json}": [
