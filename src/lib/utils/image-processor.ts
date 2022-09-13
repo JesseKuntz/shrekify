@@ -1,7 +1,7 @@
 // Largely inspired by https://codepen.io/mathdotrandom/pen/ANgeBx 🙏
 
 import PixelMapInterface from './pixel-map-interface';
-import type { ImageProcessorFunction } from './types';
+import type { ImageProcessorFunction, RGBA } from './types';
 
 const ImageProcessor = <ImageProcessorFunction>function (canvas, image) {
 	this.width = image.width;
@@ -100,15 +100,15 @@ const ImageProcessor = <ImageProcessorFunction>function (canvas, image) {
 		const ht = map.height;
 		let x = 0,
 			y = 0,
-			h,
-			s,
-			v,
-			max,
-			min,
-			delta,
-			r,
-			g,
-			b,
+			h: number,
+			s: number,
+			v: number,
+			max: number,
+			min: number,
+			delta: number,
+			r: number,
+			g: number,
+			b: number,
 			pixel = null;
 
 		map.mode = ImageProcessor.colorModes.HSL;
@@ -190,7 +190,7 @@ const ImageProcessor = <ImageProcessorFunction>function (canvas, image) {
 		const image = map.data;
 		let x = 0,
 			y = 0,
-			pixel;
+			pixel: RGBA;
 
 		for (y; y < h; y++) {
 			for (x = 0; x < w; x++) {
@@ -210,7 +210,7 @@ const ImageProcessor = <ImageProcessorFunction>function (canvas, image) {
 
 	this.manhattanOracle = (dataMap, w, h, quan) => {
 		const max = w + h;
-		let x, y;
+		let x: number, y: number;
 
 		for (y = 0; y < h; y++) {
 			for (x = 0; x < w; x++) {
