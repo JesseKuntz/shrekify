@@ -8,10 +8,6 @@ const shrekify = async (src: string) => {
 	const image = document.querySelector('.placeholder-image') as HTMLImageElement;
 	image.src = src;
 
-	if (!image.complete) {
-		console.log('we shouldnt go further 1');
-	}
-
 	const canvas = document.querySelector('.shrekify-canvas') as HTMLCanvasElement;
 
 	canvas.width = image.width;
@@ -24,10 +20,6 @@ const shrekify = async (src: string) => {
 	}
 
 	context.drawImage(image, 0, 0, image.width, image.height);
-
-	if (!image.complete) {
-		console.log('we shouldnt go further 2');
-	}
 
 	turnSkinGreen(image, canvas);
 
