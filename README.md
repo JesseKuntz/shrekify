@@ -9,7 +9,7 @@
 
 ## Technologies Used
 
-- Svelte (and SvelteKit)
+- Svelte
 - TypeScript
 - `face-api`
 - `canvas`
@@ -20,9 +20,6 @@
 yarn install
 
 yarn dev
-
-# or start the server and open the app in a new browser tab
-yarn dev -- --open
 ```
 
 To create a production version of your app:
@@ -32,5 +29,3 @@ yarn build
 ```
 
 You can preview the production build with `yarn preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.

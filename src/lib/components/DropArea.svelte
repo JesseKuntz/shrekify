@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import shrekify from '$lib/utils/shrekify';
+	import shrekify from '../utils/shrekify';
 
 	let dragging = false;
 	let dropped = false;
 	let dropArea: HTMLElement | null;
 	let file: File | null;
 	let loading = false;
-	let landscape = false;
 	let shrekifiedImage = '';
 
 	let form: HTMLFormElement;

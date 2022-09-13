@@ -1,13 +1,11 @@
 <script lang="ts">
-	import DropArea from '$lib/components/DropArea.svelte';
-	import Waves from '$lib/components/Waves.svelte';
-	import leftEar from '../assets/left-ear.png';
-	import rightEar from '../assets/right-ear.png';
+	import DropArea from './lib/components/DropArea.svelte';
+	import leftEar from './assets/left-ear.png';
+	import rightEar from './assets/right-ear.png';
 </script>
 
 <main class="center-everything">
 	<div class="header-container">
-		<Waves />
 		<h1>Shrekify</h1>
 		<div class="header-background" />
 	</div>
@@ -30,7 +28,7 @@
 		font-family: 'Shrek';
 		font-style: normal;
 		font-weight: 400;
-		src: url('../assets/shrek.woff2') format('woff2'), url('../assets/shrek.woff') format('woff');
+		src: url('./assets/shrek.woff2') format('woff2'), url('./assets/shrek.woff') format('woff');
 	}
 
 	main {
@@ -44,7 +42,7 @@
 	}
 
 	.header-background {
-		background: #672c29;
+		background: #3f2a1f;
 		position: absolute;
 		top: 0;
 		bottom: 0;

@@ -1,9 +1,9 @@
 import * as faceapi from '@vladmandic/face-api';
 import type { Point } from '@vladmandic/face-api';
-import { turnSkinGreen } from '$lib/utils/canvas-helpers';
+import { turnSkinGreen } from './canvas-helpers';
 
 const shrekify = async (src: string) => {
-	await faceapi.loadSsdMobilenetv1Model('./src/assets/models');
+	await faceapi.loadSsdMobilenetv1Model('./models');
 
 	const image = document.querySelector('.placeholder-image') as HTMLImageElement;
 	image.src = src;
