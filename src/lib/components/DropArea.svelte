@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import shrekify from '$lib/utils/shrekify';
 
 	let dragging = false;
 	let dropped = false;
@@ -22,33 +23,19 @@
 	}
 
 	function uploadFile(file: File) {
-		const url = '/shrekify';
-
-		readFile(file, (src) => {
-			let formData = new FormData();
-			formData.append('file', src);
-			formData.append('landscape', landscape ? '1' : '0');
-
+		readFile(file, async (src) => {
 			loading = true;
 
-			landscape = previewImage.width > previewImage.height;
+			const response = await shrekify(src);
 
-			fetch(url, {
-				method: 'POST',
-				body: formData
-			})
-				.then(async (response) => {
-					const json = await response.json();
+			if (response) {
+				previewImage.src = response;
+				shrekifiedImage = response;
+			} else {
+				// TODO: Add error handling
+			}
 
-					previewImage.src = json.image;
-					shrekifiedImage = json.image;
-				})
-				.catch(() => {
-					/* Error. Inform the user */
-				})
-				.finally(() => {
-					loading = false;
-				});
+			loading = false;
 		});
 	}
 

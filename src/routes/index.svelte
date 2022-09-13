@@ -1,6 +1,8 @@
 <script lang="ts">
 	import DropArea from '$lib/components/DropArea.svelte';
 	import Waves from '$lib/components/Waves.svelte';
+	import leftEar from '../assets/left-ear.png';
+	import rightEar from '../assets/right-ear.png';
 </script>
 
 <main class="center-everything">
@@ -11,6 +13,16 @@
 	</div>
 
 	<DropArea />
+
+	<!-- Image Processing Elements -->
+	<div class="hide">
+		<canvas class="shrekify-canvas" />
+		<canvas class="image-processing-canvas" />
+		<canvas class="buffer-canvas" />
+		<img class="placeholder-image" src="" alt="" />
+		<img class="left-ear" src={leftEar} alt="" />
+		<img class="right-ear" src={rightEar} alt="" />
+	</div>
 </main>
 
 <style>
@@ -46,6 +58,7 @@
 		text-align: center;
 		font-size: 80px;
 		background: linear-gradient(lime, green);
+		background-clip: text;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		margin: 0;
@@ -59,6 +72,10 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.hide {
+		display: none;
 	}
 
 	@media (max-width: 600px) {

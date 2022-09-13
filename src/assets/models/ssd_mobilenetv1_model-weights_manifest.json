@@ -1,6 +1,6 @@
 [
 	{
-		"paths": ["ssd_mobilenetv1_model-shard1", "ssd_mobilenetv1_model-shard2"],
+		"paths": ["ssd_mobilenetv1_model-shard1.shard", "ssd_mobilenetv1_model-shard2.shard"],
 		"weights": [
 			{
 				"dtype": "float32",

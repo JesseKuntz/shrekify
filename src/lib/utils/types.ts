@@ -1,5 +1,3 @@
-import type { Image, ImageData, Canvas } from 'canvas';
-
 export type RGBA = {
 	R: number;
 	G: number;
@@ -31,9 +29,9 @@ export type ImageProcessorFunction = {
 			render: () => void;
 			getMap: () => PixelMapInterfaceThis;
 			setMap: (map: PixelMapInterfaceThis) => void;
-			pasteImage: (image: Image) => void;
-			compositePaintImage: (image: Image, gco: GlobalCompositeOperation) => void;
-			tint: (canvas: Canvas) => void;
+			pasteImage: (image: HTMLImageElement) => void;
+			compositePaintImage: (image: HTMLImageElement, gco: GlobalCompositeOperation) => void;
+			tint: (canvas: HTMLCanvasElement) => void;
 			getImageUrl: () => string;
 			toHSV: (map: PixelMapInterfaceThis) => void;
 			threshold: (
@@ -55,10 +53,10 @@ export type ImageProcessorFunction = {
 				h: number,
 				quan: number
 			) => Array<Array<number>>;
-			loadImage: (image: Image) => void;
+			loadImage: (image: HTMLImageElement) => void;
 		},
-		canvas: Canvas,
-		image: Image
+		canvas: HTMLCanvasElement,
+		image: HTMLImageElement
 	): void;
 	colorModes: Record<string, number>;
 	RGBA: RGBA;
