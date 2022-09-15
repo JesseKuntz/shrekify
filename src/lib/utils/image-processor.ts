@@ -1,4 +1,4 @@
-// Largely inspired by https://codepen.io/mathdotrandom/pen/ANgeBx 🙏
+// Largely inspired (lots of copy/paste) by https://codepen.io/mathdotrandom/pen/ANgeBx 🙏
 
 import PixelMapInterface from './pixel-map-interface';
 import type { ImageProcessorFunction, RGBA } from './types';

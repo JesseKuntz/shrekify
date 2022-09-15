@@ -1,18 +1,20 @@
 <p align="center">
   <a href="https://jessekuntz.github.io">
-    <img alt="Shrekify Logo" src="https://res.cloudinary.com/actracker/image/upload/v1662767485/logos/shrekify.png" width="400" />
+    <img alt="Shrekify Logo" src="./public/logo.png" width="100" style="border-radius: 12px;" />
   </a>
 </p>
 <h1 align="center">
   Shrekify
 </h1>
 
-## Technologies Used
+## Notable Technologies Used
 
 - Svelte
 - TypeScript
+- ESLint + Prettier
+- `husky` + `lint-staged`
 - `face-api`
-- `canvas`
+- HTML5 Canvas
 
 ## Running Things
 
