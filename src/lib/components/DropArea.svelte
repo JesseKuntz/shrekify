@@ -7,6 +7,7 @@
 	let dropArea: HTMLElement | null;
 	let file: File | null;
 	let loading = false;
+	let error = false;
 	let shrekifiedImage = '';
 
 	let form: HTMLFormElement;
@@ -23,6 +24,7 @@
 
 	function uploadFile(file: File) {
 		readFile(file, async (src) => {
+			error = false;
 			loading = true;
 
 			const response = await shrekify(src);
@@ -31,7 +33,7 @@
 				previewImage.src = response;
 				shrekifiedImage = response;
 			} else {
-				// TODO: Add error handling
+				error = true;
 			}
 
 			loading = false;
@@ -73,6 +75,7 @@
 	function clearFile() {
 		file = null;
 		dropped = false;
+		error = false;
 		shrekifiedImage = '';
 		previewImage.src = '';
 		form.reset();
@@ -131,14 +134,17 @@
 	</div>
 
 	<div class="preview-container">
-		<div class:hide={!loading} class="loader">Loading...</div>
+		<div class:hide={!loading} class="status-text loader">Loading...</div>
+		<div class:hide={!error} class="status-text error">
+			Sorry, something went wrong with the Shrekification. Try again, maybe...
+		</div>
 		<img bind:this={previewImage} class="preview-image" src="" alt="" />
 	</div>
 </div>
 
 <style>
 	.container {
-		margin-top: 30px;
+		margin: 30px 0;
 	}
 
 	.drop-area {
@@ -195,16 +201,23 @@
 		margin: auto;
 	}
 
-	.loader {
+	.status-text {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		padding: 12px 0;
-		background: rgb(0, 0, 0, 0.6);
 		color: rgb(255, 255, 255);
 		text-align: center;
 		border-radius: 8px;
+	}
+
+	.loader {
+		background: rgb(0, 0, 0, 0.6);
+	}
+
+	.error {
+		background: rgba(100, 0, 0, 0.8);
 	}
 
 	.preview-image {
