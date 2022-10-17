@@ -1,6 +1,7 @@
+import type { Image, Canvas } from 'canvas';
 import ImageProcessor from './image-processor';
 
-export const turnSkinGreen = (image: HTMLImageElement, canvas: HTMLCanvasElement) => {
+export const turnSkinGreen = (image: Image, canvas: Canvas) => {
 	// Would need to convert to class... maybe at some point!
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore

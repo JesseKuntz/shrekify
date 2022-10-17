@@ -1,4 +1,4 @@
-// Largely inspired (lots of copy/paste) by https://codepen.io/mathdotrandom/pen/ANgeBx 🙏
+// Largely inspired by https://codepen.io/mathdotrandom/pen/ANgeBx 🙏
 
 import type { PixelMapInterfaceFunction } from './types';
 
@@ -42,7 +42,7 @@ const PixelMapInterface = <PixelMapInterfaceFunction>function (mode, width, heig
 		let x = 0,
 			y = 0,
 			pixel_iter = 0,
-			pixel = null;
+			pixel;
 
 		for (y = 0; y < this.height; y++) {
 			for (x = 0; x < this.width; x++) {
@@ -61,7 +61,7 @@ const PixelMapInterface = <PixelMapInterfaceFunction>function (mode, width, heig
 		let x = 0,
 			y = 0,
 			pixel_iter = 0,
-			pixel = null;
+			pixel;
 
 		for (y = 0; y < this.height; y++) {
 			for (x = 0; x < this.width; x++) {

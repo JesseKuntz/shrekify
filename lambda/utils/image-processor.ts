@@ -1,36 +1,32 @@
-// Largely inspired (lots of copy/paste) by https://codepen.io/mathdotrandom/pen/ANgeBx 🙏
+// Largely inspired by https://codepen.io/mathdotrandom/pen/ANgeBx 🙏
 
+import * as nodeCanvas from 'canvas';
+import type { ImageData } from 'canvas';
 import PixelMapInterface from './pixel-map-interface';
-import type { ImageProcessorFunction, RGBA } from './types';
+import type { ImageProcessorFunction } from './types';
 
 const ImageProcessor = <ImageProcessorFunction>function (canvas, image) {
+	const { createCanvas, Image } = nodeCanvas;
+
 	this.width = image.width;
 	this.height = image.height;
 
-	const ipCanvas = document.querySelector('.image-processing-canvas') as HTMLCanvasElement;
-	ipCanvas.width = this.width;
-	ipCanvas.height = this.height;
-
-	const ipCanvasContext = ipCanvas.getContext('2d');
-
-	if (!ipCanvasContext) {
-		return;
-	}
-
-	let imageData: ImageData | null = null;
+	const node = createCanvas(this.width, this.height);
+	const bufferCtx = node.getContext('2d');
+	let bufferImageData: ImageData | null = null;
 	// Would need to convert to class... maybe at some point!
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
 	let map = new PixelMapInterface(ImageProcessor.colorModes.RGBA, this.width, this.height);
 
 	this.update = () => {
-		imageData = ipCanvasContext.getImageData(0, 0, this.width, this.height);
-		map.loadFromCanvasPixelArray(imageData);
+		bufferImageData = bufferCtx.getImageData(0, 0, this.width, this.height);
+		map.loadFromCanvasPixelArray(bufferImageData);
 	};
 
 	this.render = () => {
-		map.dumpToCanvasPixelArray(imageData);
-		imageData && ipCanvasContext.putImageData(imageData, 0, 0);
+		map.dumpToCanvasPixelArray(bufferImageData);
+		bufferImageData && bufferCtx.putImageData(bufferImageData, 0, 0);
 	};
 
 	this.getMap = () => {
@@ -41,58 +37,46 @@ const ImageProcessor = <ImageProcessorFunction>function (canvas, image) {
 		if (newMap.mode !== undefined) map = newMap;
 	};
 
-	this.loadImage = () => {
-		this.pasteImage(image);
-	};
-
 	this.pasteImage = (image) => {
-		ipCanvasContext.drawImage(image, 0, 0, this.width, this.height);
+		bufferCtx.drawImage(image, 0, 0, this.width, this.height);
 		this.update();
 	};
 
 	this.compositePaintImage = (image, gco) => {
-		ipCanvasContext.globalCompositeOperation = gco;
+		bufferCtx.globalCompositeOperation = gco;
 		this.pasteImage(image);
-		ipCanvasContext.globalCompositeOperation = 'source-over';
+		bufferCtx.globalCompositeOperation = 'source-over';
 	};
 
 	this.tint = () => {
-		const canvasContext = canvas.getContext('2d');
+		const x = canvas.getContext('2d');
 
-		if (!canvasContext) {
-			return;
-		}
+		const fg = new Image();
+		fg.src = this.getImageUrl();
 
-		// create offscreen buffer
-		const bufferCanvas = document.querySelector('.buffer-canvas') as HTMLCanvasElement;
-		bufferCanvas.width = this.width;
-		bufferCanvas.height = this.height;
-		// const buffer = createCanvas(fg.width, fg.height);
-		const bufferCanvasContext = bufferCanvas.getContext('2d');
-
-		if (!bufferCanvasContext) {
-			return;
-		}
+		// create offscreen buffer,
+		const buffer = createCanvas(fg.width, fg.height);
+		const bx = buffer.getContext('2d');
 
 		// fill offscreen buffer with the tint color
-		bufferCanvasContext.fillStyle = '#00FF00';
-		bufferCanvasContext.fillRect(0, 0, bufferCanvas.width, bufferCanvas.height);
+		bx.fillStyle = '#00FF00';
+		bx.fillRect(0, 0, buffer.width, buffer.height);
 
 		// destination atop makes a result with an alpha channel identical to fg, but with all pixels retaining their original color *as far as I can tell*
-		bufferCanvasContext.globalCompositeOperation = 'destination-atop';
-		bufferCanvasContext.drawImage(ipCanvas, 0, 0);
+		bx.globalCompositeOperation = 'destination-atop';
+		bx.drawImage(fg, 0, 0);
 
 		// to tint the image, draw it first
-		canvasContext.drawImage(ipCanvas, 0, 0);
+		x.drawImage(fg, 0, 0);
 
 		//then set the global alpha to the amound that you want to tint it, and draw the buffer directly on top of it.
-		canvasContext.globalAlpha = 0.2;
-		canvasContext.drawImage(bufferCanvas, 0, 0);
-		canvasContext.globalAlpha = 1;
+		x.globalAlpha = 0.2;
+		x.drawImage(buffer, 0, 0);
+		x.globalAlpha = 1;
 	};
 
 	this.getImageUrl = () => {
-		return ipCanvas.toDataURL('image/png');
+		return node.toDataURL('image/png');
 	};
 
 	this.toHSV = (map) => {
@@ -100,16 +84,16 @@ const ImageProcessor = <ImageProcessorFunction>function (canvas, image) {
 		const ht = map.height;
 		let x = 0,
 			y = 0,
-			h: number,
-			s: number,
-			v: number,
-			max: number,
-			min: number,
-			delta: number,
-			r: number,
-			g: number,
-			b: number,
-			pixel = null;
+			h,
+			s,
+			v,
+			max,
+			min,
+			delta,
+			r,
+			g,
+			b,
+			pixel;
 
 		map.mode = ImageProcessor.colorModes.HSL;
 
@@ -165,7 +149,7 @@ const ImageProcessor = <ImageProcessorFunction>function (canvas, image) {
 		const ht = map.height;
 		let x = 0,
 			y = 0,
-			pixel = null;
+			pixel;
 
 		for (y; y < ht; y++) {
 			for (x = 0; x < w; x++) {
@@ -190,7 +174,7 @@ const ImageProcessor = <ImageProcessorFunction>function (canvas, image) {
 		const image = map.data;
 		let x = 0,
 			y = 0,
-			pixel: RGBA;
+			pixel;
 
 		for (y; y < h; y++) {
 			for (x = 0; x < w; x++) {
@@ -210,7 +194,7 @@ const ImageProcessor = <ImageProcessorFunction>function (canvas, image) {
 
 	this.manhattanOracle = (dataMap, w, h, quan) => {
 		const max = w + h;
-		let x: number, y: number;
+		let x, y;
 
 		for (y = 0; y < h; y++) {
 			for (x = 0; x < w; x++) {
@@ -243,6 +227,10 @@ const ImageProcessor = <ImageProcessorFunction>function (canvas, image) {
 		}
 
 		return dataMap as Array<Array<number>>;
+	};
+
+	this.loadImage = () => {
+		this.pasteImage(image);
 	};
 };
 

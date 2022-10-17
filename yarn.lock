@@ -213,11 +213,6 @@
     "@typescript-eslint/types" "5.37.0"
     eslint-visitor-keys "^3.3.0"
 
-"@vladmandic/face-api@^1.7.3":
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/@vladmandic/face-api/-/face-api-1.7.3.tgz#0dd0a76c6dffdbbef49fa90a14eca33f4d629244"
-  integrity sha512-8ldRmPh2JmQbCvvVdQWr5k3utalQJjI1z5wNTPY/S6ZYyrKkjzMx/3DlbSq4zye97aXHbvh36iERl+SK3wLAqw==
-
 acorn-jsx@^5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.3.2.tgz#7ed5bb55908b3b2f1bc55c6af1653bada7f07937"

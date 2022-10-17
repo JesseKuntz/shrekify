@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import shrekify from '../utils/shrekify';
 
 	let dragging = false;
 	let dropped = false;
@@ -27,11 +26,23 @@
 			error = false;
 			loading = true;
 
-			const response = await shrekify(src);
+			const rawResponse = await fetch(
+				'https://oi3wzjer82.execute-api.us-east-2.amazonaws.com/default/shrekify',
+				{
+					method: 'POST',
+					body: JSON.stringify({
+						file: src
+					})
+				}
+			);
 
-			if (response) {
-				previewImage.src = response;
-				shrekifiedImage = response;
+			console.log(rawResponse);
+
+			if (rawResponse.ok) {
+				const response = await rawResponse.json();
+
+				previewImage.src = response.image;
+				shrekifiedImage = response.image;
 			} else {
 				error = true;
 			}
@@ -136,7 +147,7 @@
 	<div class="preview-container">
 		<div class:hide={!loading} class="status-text loader">Loading...</div>
 		<div class:hide={!error} class="status-text error">
-			Sorry, something went wrong with the Shrekification. Try again, maybe...
+			Sorry, something went wrong with the Shrekification. Try again, or use a different image.
 		</div>
 		<img bind:this={previewImage} class="preview-image" src="" alt="" />
 	</div>
