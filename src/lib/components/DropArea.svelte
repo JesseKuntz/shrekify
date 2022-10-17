@@ -3,14 +3,15 @@
 
 	let dragging = false;
 	let dropped = false;
-	let dropArea: HTMLElement | null;
-	let file: File | null;
 	let loading = false;
 	let error = false;
+	let file: File | null;
 	let shrekifiedImage = '';
-
+	let dropArea: HTMLElement | null;
 	let form: HTMLFormElement;
 	let previewImage: HTMLImageElement;
+
+	const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
 
 	function readFile(file: File, callback: (data: string) => void) {
 		const reader = new FileReader();
@@ -70,9 +71,11 @@
 	function handleFiles(files: FileList) {
 		const firstFile = files[0];
 
-		previewFile(firstFile);
+		if (SUPPORTED_TYPES.includes(firstFile.type)) {
+			previewFile(firstFile);
 
-		file = firstFile;
+			file = firstFile;
+		}
 	}
 
 	function previewFile(file: File) {
@@ -138,10 +141,15 @@
 
 	<div class="drop-area" class:highlight={dragging} class:hide={dropped}>
 		<form bind:this={form} class="my-form">
-			<input type="file" id="fileElem" accept="image/*" on:change={handleInputChange} />
-			<label class="button" for="fileElem">Upload a Face</label>
+			<input
+				type="file"
+				id="file-input"
+				accept={SUPPORTED_TYPES.join(',')}
+				on:change={handleInputChange}
+			/>
+			<label class="button" for="file-input">Upload a Face</label>
 		</form>
-		<div>...or Drag 'n Drop</div>
+		<div>...or Drag 'n Drop a .jpg or .png</div>
 	</div>
 
 	<div class="preview-container">
@@ -202,7 +210,7 @@
 		background: rgb(252, 81, 81);
 	}
 
-	#fileElem {
+	#file-input {
 		display: none;
 	}
 
