@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Button from './Button.svelte';
 
 	let dragging = false;
 	let dropped = false;
@@ -96,11 +97,15 @@
 	}
 
 	function downloadImage() {
-		var a = document.createElement('a');
+		const a = document.createElement('a');
+
 		a.href = shrekifiedImage;
 		a.download = 'shrekified.png';
+
 		document.body.appendChild(a);
+
 		a.click();
+
 		document.body.removeChild(a);
 	}
 
@@ -132,11 +137,11 @@
 
 <div class="container center-everything">
 	<div class:hide={!dropped} class="button-container">
-		<button class="button shrekify-button" on:click={() => file && uploadFile(file)}
-			>Shrekify</button
+		<Button color={'124'} onClick={() => file && uploadFile(file)} disabled={loading}
+			>Shrekify</Button
 		>
-		<button class="button clear-button" on:click={clearFile}>Start Over</button>
-		<button class="button" class:hide={!shrekifiedImage} on:click={downloadImage}>Download</button>
+		<Button color={'340'} onClick={clearFile} disabled={loading}>Start Over</Button>
+		<Button hide={!shrekifiedImage} onClick={downloadImage}>Download</Button>
 	</div>
 
 	<div class="drop-area" class:highlight={dragging} class:hide={dropped}>
@@ -147,7 +152,7 @@
 				accept={SUPPORTED_TYPES.join(',')}
 				on:change={handleInputChange}
 			/>
-			<label class="button" for="file-input">Upload a Face</label>
+			<Button input="file-input">Upload a Face</Button>
 		</form>
 		<div>...or Drag 'n Drop a .jpg or .png</div>
 	</div>
@@ -182,32 +187,6 @@
 
 	.button-container {
 		margin: 0 auto 20px;
-	}
-
-	.button {
-		font-family: 'Shrek';
-		font-size: 26px;
-		display: inline-block;
-		padding: 10px;
-		background: rgb(137, 226, 248);
-		cursor: pointer;
-		border-radius: 4px;
-		border: none;
-		color: black;
-		margin-bottom: 12px;
-		text-decoration: none;
-	}
-
-	.button:hover {
-		box-shadow: black 0px 0px 10px 0px inset;
-	}
-
-	.shrekify-button {
-		background: rgb(0, 255, 0);
-	}
-
-	.clear-button {
-		background: rgb(252, 81, 81);
 	}
 
 	#file-input {

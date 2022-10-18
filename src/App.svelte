@@ -22,7 +22,7 @@
 	main {
 		font-family: 'Shrek';
 		text-align: center;
-		font-size: 26px;
+		font-size: 22px;
 	}
 
 	.header-container {
