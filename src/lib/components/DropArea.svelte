@@ -109,6 +109,30 @@
 		document.body.removeChild(a);
 	}
 
+	async function shareImage() {
+		const response = await fetch(shrekifiedImage);
+		const blob = await response.blob();
+
+		const files = [
+			new File([blob], 'shrekify.jpg', {
+				type: 'image/jpeg',
+				lastModified: new Date().getTime()
+			})
+		];
+
+		if (
+			navigator.canShare({
+				files
+			})
+		) {
+			return navigator.share({
+				files
+			});
+		}
+
+		window.alert('Sorry, sharing is not available in this browser.');
+	}
+
 	function preventDefaults(e: Event) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -142,6 +166,9 @@
 		>
 		<Button color={'340'} onClick={clearFile} disabled={loading}>Start Over</Button>
 		<Button hide={!shrekifiedImage} onClick={downloadImage}>Download</Button>
+		<Button color={'290'} hide={!shrekifiedImage || !navigator.canShare} onClick={shareImage}
+			>Share</Button
+		>
 	</div>
 
 	<div class="drop-area" class:highlight={dragging} class:hide={dropped}>
