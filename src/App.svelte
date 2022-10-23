@@ -65,5 +65,13 @@
 			font-size: 60px;
 			padding: 20px 20px;
 		}
+
+		.header-container {
+			width: 100%;
+		}
+
+		.header-background {
+			border-radius: 0;
+		}
 	}
 </style>

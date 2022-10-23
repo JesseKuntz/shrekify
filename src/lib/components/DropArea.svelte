@@ -38,8 +38,6 @@
 				}
 			);
 
-			console.log(rawResponse);
-
 			if (rawResponse.ok) {
 				const response = await rawResponse.json();
 
@@ -159,10 +157,13 @@
 	onMount(() => initializeDropArea());
 </script>
 
-<div class="container center-everything">
+<div class="container">
 	<div class:hide={!dropped} class="button-container">
-		<Button color={'124'} onClick={() => file && uploadFile(file)} disabled={loading}
-			>Shrekify</Button
+		<Button
+			color={'124'}
+			hide={!!shrekifiedImage}
+			onClick={() => file && uploadFile(file)}
+			disabled={loading}>Shrekify</Button
 		>
 		<Button color={'340'} onClick={clearFile} disabled={loading}>Start Over</Button>
 		<Button hide={!shrekifiedImage} onClick={downloadImage}>Download</Button>
@@ -223,7 +224,7 @@
 	.preview-container {
 		position: relative;
 		max-width: 500px;
-		margin: auto;
+		margin: 0 24px;
 	}
 
 	.status-text {
