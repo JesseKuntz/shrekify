@@ -13,6 +13,27 @@
 	let previewImage: HTMLImageElement;
 
 	const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
+	const SHREKIFY_API_URL =
+		'https://oi3wzjer82.execute-api.us-east-2.amazonaws.com/default/shrekify-v2';
+
+	function calculateSize(img: HTMLImageElement, maxWidth = 1000, maxHeight = 1000) {
+		let width = img.width;
+		let height = img.height;
+
+		if (width > height) {
+			if (width > maxWidth) {
+				height = Math.round((height * maxWidth) / width);
+				width = maxWidth;
+			}
+		} else {
+			if (height > maxHeight) {
+				width = Math.round((width * maxHeight) / height);
+				height = maxHeight;
+			}
+		}
+
+		return { width, height };
+	}
 
 	function readFile(file: File, callback: (data: string) => void) {
 		const reader = new FileReader();
@@ -24,19 +45,32 @@
 	}
 
 	function uploadFile(file: File) {
-		readFile(file, async (src) => {
-			error = false;
-			loading = true;
+		error = false;
+		loading = true;
 
-			const rawResponse = await fetch(
-				'https://oi3wzjer82.execute-api.us-east-2.amazonaws.com/default/shrekify',
-				{
-					method: 'POST',
-					body: JSON.stringify({
-						file: src
-					})
-				}
-			);
+		const blobURL = URL.createObjectURL(file);
+		const image = new Image();
+
+		image.onload = async () => {
+			URL.revokeObjectURL(blobURL);
+
+			const { width, height } = calculateSize(image);
+
+			const canvas = document.createElement('canvas');
+			canvas.width = width;
+			canvas.height = height;
+
+			const ctx = canvas.getContext('2d');
+			ctx?.drawImage(image, 0, 0, width, height);
+
+			const dataUrl = canvas.toDataURL('image/jpeg');
+
+			const rawResponse = await fetch(SHREKIFY_API_URL, {
+				method: 'POST',
+				body: JSON.stringify({
+					file: dataUrl
+				})
+			});
 
 			if (rawResponse.ok) {
 				const response = await rawResponse.json();
@@ -48,7 +82,9 @@
 			}
 
 			loading = false;
-		});
+		};
+
+		image.src = blobURL;
 	}
 
 	function handleDrop(e: DragEvent) {
