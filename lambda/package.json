@@ -1,9 +1,10 @@
 {
 	"name": "shrekify-lambda",
 	"main": "index.ts",
+	"scripts": {
+		"build": "tsc"
+	},
 	"dependencies": {
-		"@tensorflow/tfjs-node": "^3.20.0",
-		"@vladmandic/face-api": "^1.7.3",
 		"canvas": "^2.10.1"
 	}
 }

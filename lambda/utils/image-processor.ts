@@ -1,4 +1,4 @@
-// Largely inspired by https://codepen.io/mathdotrandom/pen/ANgeBx 🙏
+// Converted to TS from https://codepen.io/mathdotrandom/pen/ANgeBx 🙏
 
 import * as nodeCanvas from 'canvas';
 import type { ImageData } from 'canvas';

@@ -12,7 +12,10 @@ dist
 dist-ssr
 *.local
 *.zip
+
+# Lambda
 lambda/**/*.js
+!lambda/face-detect/**
 
 # Editor directories and files
 .vscode/*
