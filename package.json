@@ -11,7 +11,7 @@
 		"format": "prettier --write --plugin-search-dir=. .",
 		"lambda:build": "cd lambda && tsc",
 		"lambda:zip": "cd lambda && rm -rf node_modules shrekify.zip && zip -r shrekify.zip . && npm i",
-		"lambda:deploy": "cd lambda && aws lambda update-function-code --function-name shrekify-v2 --zip-file fileb://shrekify.zip"
+		"lambda:deploy": "cd lambda && aws lambda update-function-code --function-name shrekify --zip-file fileb://shrekify.zip"
 	},
 	"devDependencies": {
 		"@sveltejs/vite-plugin-svelte": "^1.0.2",

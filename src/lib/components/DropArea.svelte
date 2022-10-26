@@ -14,7 +14,7 @@
 
 	const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
 	const SHREKIFY_API_URL =
-		'https://oi3wzjer82.execute-api.us-east-2.amazonaws.com/default/shrekify-v2';
+		'https://oi3wzjer82.execute-api.us-east-2.amazonaws.com/default/shrekify';
 
 	function calculateSize(img: HTMLImageElement, maxWidth = 1000, maxHeight = 1000) {
 		let width = img.width;
