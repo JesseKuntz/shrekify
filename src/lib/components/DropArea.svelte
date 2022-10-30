@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Button from './Button.svelte';
+	import { downloadImage, shareImage, calculateSize } from '../utils/image-helpers';
 
 	let dragging = false;
 	let dropped = false;
@@ -15,25 +16,6 @@
 	const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
 	const SHREKIFY_API_URL =
 		'https://oi3wzjer82.execute-api.us-east-2.amazonaws.com/default/shrekify';
-
-	function calculateSize(img: HTMLImageElement, maxWidth = 1000, maxHeight = 1000) {
-		let width = img.width;
-		let height = img.height;
-
-		if (width > height) {
-			if (width > maxWidth) {
-				height = Math.round((height * maxWidth) / width);
-				width = maxWidth;
-			}
-		} else {
-			if (height > maxHeight) {
-				width = Math.round((width * maxHeight) / height);
-				height = maxHeight;
-			}
-		}
-
-		return { width, height };
-	}
 
 	function readFile(file: File, callback: (data: string) => void) {
 		const reader = new FileReader();
@@ -130,43 +112,6 @@
 		form.reset();
 	}
 
-	function downloadImage() {
-		const a = document.createElement('a');
-
-		a.href = shrekifiedImage;
-		a.download = 'shrekified.png';
-
-		document.body.appendChild(a);
-
-		a.click();
-
-		document.body.removeChild(a);
-	}
-
-	async function shareImage() {
-		const response = await fetch(shrekifiedImage);
-		const blob = await response.blob();
-
-		const files = [
-			new File([blob], 'shrekify.jpg', {
-				type: 'image/jpeg',
-				lastModified: new Date().getTime()
-			})
-		];
-
-		if (
-			navigator.canShare({
-				files
-			})
-		) {
-			return navigator.share({
-				files
-			});
-		}
-
-		window.alert('Sorry, sharing is not available in this browser.');
-	}
-
 	function preventDefaults(e: Event) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -202,9 +147,11 @@
 			disabled={loading}>Shrekify</Button
 		>
 		<Button color={'340'} onClick={clearFile} disabled={loading}>Start Over</Button>
-		<Button hide={!shrekifiedImage} onClick={downloadImage}>Download</Button>
-		<Button color={'290'} hide={!shrekifiedImage || !navigator.canShare} onClick={shareImage}
-			>Share</Button
+		<Button hide={!shrekifiedImage} onClick={() => downloadImage(shrekifiedImage)}>Download</Button>
+		<Button
+			color={'290'}
+			hide={!shrekifiedImage || !navigator.canShare}
+			onClick={() => shareImage(shrekifiedImage)}>Share</Button
 		>
 	</div>
 
@@ -233,6 +180,9 @@
 <style>
 	.container {
 		margin: 30px 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.drop-area {
