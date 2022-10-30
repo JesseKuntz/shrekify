@@ -466,6 +466,11 @@ emoji-regex@^9.2.2:
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-9.2.2.tgz#840c8803b0d8047f4ff0cf963176b32d4ef3ed72"
   integrity sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==
 
+emoji-sprinkle@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/emoji-sprinkle/-/emoji-sprinkle-1.2.0.tgz#eca9e1248e22f6d6d3af4fad267b4066552b8c17"
+  integrity sha512-aL9r2nXFHLJg2nFVob2LYN3dfe7Nm8nXbhrsOVRj0KE6mhBZEKS4QwBxypBg9vvNQ8xpzlRFH60N35ox5CxDwg==
+
 es6-promise@^3.1.2:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-3.3.1.tgz#a08cdde84ccdbf34d027a1451bc91d4bcd28a613"

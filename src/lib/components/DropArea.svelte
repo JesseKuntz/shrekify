@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { sprinkleEmojis } from 'emoji-sprinkle';
 	import Button from './Button.svelte';
 	import { downloadImage, shareImage, calculateSize } from '../utils/image-helpers';
 
@@ -59,6 +60,8 @@
 
 				previewImage.src = response.image;
 				shrekifiedImage = response.image;
+
+				sprinkleEmojis({ emoji: '💩', fontSize: 100, count: 300 });
 			} else {
 				error = true;
 			}
