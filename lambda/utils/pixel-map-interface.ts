@@ -1,4 +1,6 @@
-// Converted to TS from https://codepen.io/mathdotrandom/pen/ANgeBx 🙏
+/****
+ * Not my code: converted to TS from https://codepen.io/mathdotrandom/pen/ANgeBx
+ ****/
 
 import type { PixelMapInterfaceFunction } from './types';
 

@@ -1,4 +1,6 @@
-// Copied and patched from https://www.npmjs.com/package/face-detect 🙏
+/****
+ * Not my code: copied and patched from https://www.npmjs.com/package/face-detect
+ ****/
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const cascade = require('./cascade.js');
