@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DropArea from './lib/components/DropArea.svelte';
+	import { DropArea, InstructionModal } from 'src/lib/components';
 </script>
 
 <main class="center-everything">
@@ -7,6 +7,8 @@
 		<h1>Shrekify</h1>
 		<div class="header-background" />
 	</div>
+
+	<InstructionModal />
 
 	<DropArea />
 </main>
