@@ -2,10 +2,12 @@ declare module 'emoji-sprinkle' {
 	export function sprinkleEmojis({
 		emoji,
 		fontSize,
-		count
+		count,
+		fade
 	}: {
-		emoji: string;
-		fontSize: number;
-		count: number;
+		emoji?: string;
+		fontSize?: number;
+		count?: number;
+		fade?: number;
 	}): void;
 }
