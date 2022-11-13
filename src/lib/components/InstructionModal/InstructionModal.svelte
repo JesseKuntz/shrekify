@@ -9,5 +9,5 @@
 </script>
 
 <Modal show={$modal}>
-	<Button onClick={showModal}>Instructions</Button>
+	<Button color={'40'} onClick={showModal} icon="info">Instructions</Button>
 </Modal>

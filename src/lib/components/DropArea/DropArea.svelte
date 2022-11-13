@@ -147,14 +147,18 @@
 			color={'124'}
 			hide={!!shrekifiedImage}
 			onClick={() => file && uploadFile(file)}
-			disabled={loading}>Shrekify</Button
+			disabled={loading}
+			icon="image">Shrekify</Button
 		>
-		<Button color={'340'} onClick={clearFile} disabled={loading}>Start Over</Button>
-		<Button hide={!shrekifiedImage} onClick={() => downloadImage(shrekifiedImage)}>Download</Button>
+		<Button color={'340'} onClick={clearFile} disabled={loading} icon="redo">Start Over</Button>
+		<Button hide={!shrekifiedImage} onClick={() => downloadImage(shrekifiedImage)} icon="download"
+			>Download</Button
+		>
 		<Button
 			color={'290'}
 			hide={!shrekifiedImage || !navigator.canShare}
-			onClick={() => shareImage(shrekifiedImage)}>Share</Button
+			onClick={() => shareImage(shrekifiedImage)}
+			icon="export">Share</Button
 		>
 	</div>
 
@@ -166,7 +170,7 @@
 				accept={SUPPORTED_TYPES.join(',')}
 				on:change={handleInputChange}
 			/>
-			<Button input="file-input">Upload a Face</Button>
+			<Button input="file-input" icon="upload">Upload a Face</Button>
 		</form>
 		<div>...or Drag 'n Drop a .jpg or .png</div>
 	</div>
@@ -176,7 +180,7 @@
 		<div class:hide={!error} class="status-text error">
 			Sorry, something went wrong with the Shrekification. Try again, or use a different image.
 		</div>
-		<img bind:this={previewImage} class="preview-image" src="" alt="" />
+		<img bind:this={previewImage} class:hide={!file} class="preview-image" src="" alt="" />
 	</div>
 </div>
 
@@ -204,6 +208,9 @@
 
 	.button-container {
 		margin: 0 auto 20px;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
 	}
 
 	#file-input {

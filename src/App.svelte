@@ -6,9 +6,9 @@
 	<div class="header-container">
 		<h1>Shrekify</h1>
 		<div class="header-background" />
-	</div>
 
-	<InstructionModal />
+		<InstructionModal />
+	</div>
 
 	<DropArea />
 </main>

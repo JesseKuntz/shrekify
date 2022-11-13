@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { Icon } from 'src/lib/components';
+
 	type OnClick = () => void;
 
 	export let onClick: OnClick = () => {
@@ -8,6 +10,7 @@
 	export let color = '192';
 	export let disabled = false;
 	export let input = '';
+	export let icon = '';
 
 	const tag = input ? 'label' : 'button';
 </script>
@@ -23,7 +26,14 @@
 >
 	<span class="shadow" />
 	<span class="edge" />
-	<span class="front"><slot /></span>
+	<span class="front">
+		{#if icon}
+			<span class="icon-container">
+				<Icon {icon} />
+			</span>
+		{/if}
+		<slot />
+	</span>
 </svelte:element>
 
 <style>
@@ -35,7 +45,7 @@
 		cursor: pointer;
 		outline-offset: 4px;
 		transition: filter 250ms;
-		margin-bottom: 12px;
+		margin: 0 4px 12px;
 		display: inline-block;
 	}
 
@@ -81,9 +91,10 @@
 
 	.front {
 		font-family: 'Shrek';
-		display: block;
+		display: flex;
+		align-items: center;
 		position: relative;
-		padding: 12px 42px;
+		padding: 12px 24px;
 		border-radius: 12px;
 		font-size: 22px;
 		color: black;
@@ -123,5 +134,9 @@
 
 	.hide {
 		display: none;
+	}
+
+	.icon-container {
+		margin: 2px 12px 0 0;
 	}
 </style>
