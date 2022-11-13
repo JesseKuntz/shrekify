@@ -19,7 +19,7 @@
 	this={tag}
 	{disabled}
 	for={input}
-	class={disabled ? 'disabled' : 'pushable'}
+	class={`button ${disabled ? 'disabled' : 'pushable'}`}
 	class:hide
 	on:click={onClick}
 	style="--color:{color}deg"
@@ -37,27 +37,23 @@
 </svelte:element>
 
 <style>
-	.pushable {
+	.button {
 		position: relative;
 		border: none;
 		background: transparent;
 		padding: 0;
-		cursor: pointer;
 		outline-offset: 4px;
 		transition: filter 250ms;
 		margin: 0 4px 12px;
+	}
+
+	.pushable {
+		cursor: pointer;
 		display: inline-block;
 	}
 
 	.disabled {
-		position: relative;
-		border: none;
-		background: transparent;
-		padding: 0;
 		cursor: not-allowed;
-		outline-offset: 4px;
-		transition: filter 250ms;
-		margin-bottom: 12px;
 	}
 
 	.shadow {
