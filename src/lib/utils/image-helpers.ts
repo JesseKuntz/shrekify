@@ -2,7 +2,7 @@ export const downloadImage = (image: string) => {
 	const a = document.createElement('a');
 
 	a.href = image;
-	a.download = 'shrekified.png';
+	a.download = 'shrekified';
 
 	document.body.appendChild(a);
 
