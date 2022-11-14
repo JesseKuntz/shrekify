@@ -15,7 +15,8 @@
 		borderRadius: '8px',
 		background: 'linear-gradient(#dbb098, #67985d)',
 		maxHeight: 'calc(100vh - 32px)',
-		textAlign: 'left'
+		textAlign: 'left',
+		paddingBottom: '56px'
 	}}
 	styleCloseButton={{
 		right: '32px'
