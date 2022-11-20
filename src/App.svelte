@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { DropArea, InstructionModal } from 'src/lib/components';
+	import { DropArea, Footer, InstructionModal } from 'src/lib/components';
 </script>
 
 <main class="center-everything">
@@ -11,6 +11,8 @@
 	</div>
 
 	<DropArea />
+
+	<Footer />
 </main>
 
 <style>
@@ -32,7 +34,7 @@
 	}
 
 	.header-background {
-		background: #3f2a1f;
+		background: var(--brown);
 		position: absolute;
 		top: 0;
 		bottom: 0;

@@ -11,7 +11,7 @@
 <Modal
 	show={$modal}
 	styleContent={{
-		border: '4px solid #3f2a1f',
+		border: '4px solid var(--brown)',
 		borderRadius: '8px',
 		background: 'linear-gradient(#dbb098, #67985d)',
 		maxHeight: 'calc(100vh - 32px)',

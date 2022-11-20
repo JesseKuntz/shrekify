@@ -33,7 +33,7 @@
 <ul>
 	<li>
 		Avoid skin colored clothes or things in the background of the picture. Those will likely get
-		turned green. And yes, I mean all skin colors.
+		turned green.
 	</li>
 	<li>
 		Make sure all faces are turned toward the camera, otherwise they might not get detected and will

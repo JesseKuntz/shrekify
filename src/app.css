@@ -1,3 +1,7 @@
+:root {
+	--brown: #3f2a1f;
+}
+
 html {
 	background: linear-gradient(#dbb098, #67985d);
 	background-attachment: fixed;
