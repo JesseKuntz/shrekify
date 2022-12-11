@@ -1,20 +1,11 @@
 <p align="center">
-  <a href="https://jessekuntz.github.io">
-    <img alt="Shrekify Logo" src="./public/logo.png" width="100" style="border-radius: 12px;" />
-  </a>
+  <img alt="Shrekify Logo" src="./public/logo.png" width="100" style="border-radius: 12px;" />
 </p>
 <h1 align="center">
   Shrekify
 </h1>
 
-## Notable Technologies Used
-
-- Svelte
-- TypeScript
-- ESLint + Prettier
-- `husky` + `lint-staged`
-- `canvas`
-- AWS Lambda / API Gateway
+### [👉 Full Project Description 👈](https://jessekuntz.github.io/?project=shrekify)
 
 ## Running Things
 
