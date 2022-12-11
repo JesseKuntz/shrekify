@@ -12,6 +12,7 @@
 	let shrekifiedImage = '';
 	let dropArea: HTMLElement | null;
 	let form: HTMLFormElement;
+	let input: HTMLInputElement;
 	let previewImage: HTMLImageElement;
 
 	const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
@@ -162,9 +163,16 @@
 		>
 	</div>
 
-	<div class="drop-area" class:highlight={dragging} class:hide={dropped}>
+	<div
+		class="drop-area"
+		class:highlight={dragging}
+		class:hide={dropped}
+		tabindex="0"
+		on:keyup={(event) => ['Space', 'Enter'].includes(event.code) && input.click()}
+	>
 		<form bind:this={form} class="my-form">
 			<input
+				bind:this={input}
 				type="file"
 				id="file-input"
 				accept={SUPPORTED_TYPES.join(',')}
