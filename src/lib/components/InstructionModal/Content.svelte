@@ -27,7 +27,7 @@
 
 <p>
 	With that said, there are some things you can do to get a better result, either for pictures that
-	you are taking in real-time or when looking for a good picture to Shrekify...
+	you are taking in real time or when looking for a good picture to Shrekify...
 </p>
 
 <ul>
