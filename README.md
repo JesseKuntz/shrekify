@@ -5,7 +5,7 @@
   Shrekify
 </h1>
 
-### [👉 Full Project Description 👈](https://jessekuntz.github.io/?project=shrekify)
+### [👉 Full Project Description 👈](https://jessekuntz.github.io/shrekify.html)
 
 ## Running Things
 
